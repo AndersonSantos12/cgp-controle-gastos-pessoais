@@ -12,7 +12,7 @@
   <body class="min-h-screen bg-slate-50 text-slate-800 font-sans pb-20">
     <!-- Cabeçalho Fixo -->
     <header class="bg-blue-900 text-white p-4 shadow-lg sticky top-0 z-10">
-      <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 justify-between">
+      <div class="max-w-4xl mx-auto flex items-center justify-between">
         <div class="flex items-center gap-2">
           <svg class="w-8 h-8 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
@@ -20,22 +20,31 @@
           </svg>
           <span class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent drop-shadow-lg hover:from-blue-500 hover:to-blue-700 transition-all cursor-pointer">CGP</span>
         </div>
-        <nav class="flex flex-wrap gap-2 sm:gap-3 text-sm sm:text-base w-full sm:w-auto">
-          <a href="../index.html" class="px-4 py-2 w-full sm:w-auto text-center hover:bg-blue-700 rounded-lg transition">
+        <button id="menuToggle" aria-label="Abrir menu" class="sm:hidden text-2xl p-2 hover:bg-blue-800 rounded-lg transition">
+          ☰
+        </button>
+        <nav id="navMenu" class="hidden sm:flex flex-col sm:flex-row gap-2 sm:gap-3 text-sm sm:text-base absolute sm:relative top-16 sm:top-auto left-4 right-4 sm:left-auto sm:right-auto bg-blue-900 sm:bg-transparent p-2 sm:p-0 rounded-lg sm:rounded-none">
+          <a href="../index.html" class="px-4 py-2 text-center hover:bg-blue-700 rounded-lg transition">
             Dashboard
           </a>
-          <a href="expenses.html" class="px-4 py-2 w-full sm:w-auto text-center hover:bg-blue-700 rounded-lg transition">
+          <a href="expenses.html" class="px-4 py-2 text-center hover:bg-blue-700 rounded-lg transition">
             Gastos
           </a>
-          <a href="income.html" class="px-4 py-2 w-full sm:w-auto text-center hover:bg-blue-700 rounded-lg transition">
+          <a href="income.html" class="px-4 py-2 text-center hover:bg-blue-700 rounded-lg transition">
             Rendas
           </a>
-          <a href="allocations.html" class="px-4 py-2 w-full sm:w-auto text-center bg-blue-700 rounded-lg hover:bg-blue-600 transition">
+          <a href="allocations.html" class="px-4 py-2 text-center bg-blue-700 rounded-lg hover:bg-blue-600 transition">
             Alocações
           </a>
         </nav>
       </div>
     </header>
+    <script>
+      document.getElementById('menuToggle').addEventListener('click', () => {
+        const menu = document.getElementById('navMenu');
+        menu.classList.toggle('hidden');
+      });
+    </script>
 
     <!-- Conteúdo Principal -->
     <main>
