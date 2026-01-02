@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CGP - Controle de Gastos Pessoais</title>
+    <link rel="icon" type="image/png" href="public/images/favicon2.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-800 font-sans pb-20">
+    <!-- Cabeçalho Fixo -->
+    <header class="bg-blue-900 text-white p-4 shadow-lg sticky top-0 z-10">
+      <div class="max-w-4xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <svg
+            class="w-8 h-8 text-blue-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+          <span
+            class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent drop-shadow-lg hover:from-blue-500 hover:to-blue-700 transition-all cursor-pointer"
+            >CGP</span
+          >
+        </div>
+        <nav class="flex gap-4">
+          <a
+            href="index.html"
+            class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-600 transition"
+          >
+            Dashboard
+          </a>
+          <a
+            href="pages/expenses.html"
+            class="px-4 py-2 hover:bg-blue-700 rounded-lg transition"
+          >
+            Gastos
+          </a>
+          <a
+            href="pages/income.html"
+            class="px-4 py-2 hover:bg-blue-700 rounded-lg transition"
+          >
+            Rendas
+          </a>
+          <a
+            href="pages/allocations.html"
+            class="px-4 py-2 hover:bg-blue-700 rounded-lg transition"
+          >
+            Alocações
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+      <div class="max-w-4xl mx-auto p-4 space-y-6">
+        <!-- Seletor de Mês -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+          <div
+            class="flex flex-col sm:flex-row items-center justify-between gap-4"
+          >
+            <div class="flex items-center gap-3">
+              <button
+                id="prevMonth"
+                class="bg-slate-200 hover:bg-slate-300 px-4 py-2 rounded-lg transition"
+              >
+                ← Anterior
+              </button>
+              <span
+                id="monthDisplay"
+                class="font-semibold text-slate-700 min-w-48 text-center"
+              ></span>
+              <button
+                id="nextMonth"
+                class="bg-slate-200 hover:bg-slate-300 px-4 py-2 rounded-lg transition"
+              >
+                Próximo →
+              </button>
+            </div>
+            <div class="flex gap-3">
+              <select
+                id="monthSelect"
+                class="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white max-w-xs"
+              ></select>
+              <select
+                id="yearSelect"
+                class="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white max-w-xs"
+              ></select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid de Métricas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div id="expensesMetric" class="h-full"></div>
+          <div id="incomeMetric" class="h-full"></div>
+          <div id="savingsMetric" class="h-full"></div>
+          <div id="leisureMetric" class="h-full"></div>
+        </div>
+
+        <!-- Lista de Gastos -->
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+        >
+          <div class="p-4 border-b border-slate-100">
+            <h2 class="text-xl font-semibold text-slate-900">
+              💳 Gastos do Mês
+            </h2>
+          </div>
+          <div id="expensesList" class="divide-y divide-slate-100"></div>
+        </div>
+
+        <!-- Lista de Rendas -->
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+        >
+          <div class="p-4 border-b border-slate-100">
+            <h2 class="text-xl font-semibold text-slate-900">
+              💵 Rendas do Mês
+            </h2>
+          </div>
+          <div id="incomesList" class="divide-y divide-slate-100"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="text-slate-500 py-6 mt-12" style="padding-bottom: 10px">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <p class="text-sm">
+          Powered by
+          <span class="text-blue-600 font-semibold">Anderson's Softwares</span>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Script da Aplicação -->
+    <script type="module" src="src/js/app.js"></script>
+  </body>
+</html>

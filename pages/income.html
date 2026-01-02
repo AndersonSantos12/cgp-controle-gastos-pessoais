@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Rendas - CGP</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../public/images/favicon2.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../public/images/favicon2.png"
+    />
+    <link rel="shortcut icon" href="../public/images/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-800 font-sans pb-20">
+    <!-- Cabeçalho Fixo -->
+    <header class="bg-blue-900 text-white p-4 shadow-lg sticky top-0 z-10">
+      <div class="max-w-4xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <svg
+            class="w-8 h-8 text-blue-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+          <span
+            class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent drop-shadow-lg hover:from-blue-500 hover:to-blue-700 transition-all cursor-pointer"
+            >CGP</span
+          >
+        </div>
+        <nav class="flex gap-4">
+          <a
+            href="../index.html"
+            class="px-4 py-2 hover:bg-blue-700 rounded-lg transition"
+          >
+            Dashboard
+          </a>
+          <a
+            href="expenses.html"
+            class="px-4 py-2 hover:bg-blue-700 rounded-lg transition"
+          >
+            Gastos
+          </a>
+          <a
+            href="income.html"
+            class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-600 transition"
+          >
+            Rendas
+          </a>
+          <a
+            href="allocations.html"
+            class="px-4 py-2 hover:bg-blue-700 rounded-lg transition"
+          >
+            Alocações
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+      <div class="max-w-4xl mx-auto p-4 space-y-6">
+        <!-- Grid de Formulário e Informações -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          <!-- Coluna do Formulário -->
+          <div class="lg:col-span-2">
+            <div
+              class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"
+            >
+              <h1 class="text-2xl font-bold mb-6 text-slate-900">Nova Renda</h1>
+
+              <form id="incomeForm" class="space-y-4">
+                <!-- Data -->
+                <div>
+                  <label
+                    for="date"
+                    class="block text-sm font-medium text-slate-700 mb-1"
+                    >Data *</label
+                  >
+                  <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    required
+                    class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                <!-- Tipo -->
+                <div>
+                  <label
+                    for="type"
+                    class="block text-sm font-medium text-slate-700 mb-1"
+                    >Tipo de Renda *</label
+                  >
+                  <select
+                    id="type"
+                    name="type"
+                    required
+                    class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Selecione...</option>
+                    <option value="monthly">Renda Mensal (Salário)</option>
+                    <option value="extra">Renda Extra</option>
+                  </select>
+                </div>
+
+                <!-- Descrição -->
+                <div>
+                  <label
+                    for="description"
+                    class="block text-sm font-medium text-slate-700 mb-1"
+                    >Descrição *</label
+                  >
+                  <input
+                    type="text"
+                    id="description"
+                    name="description"
+                    placeholder="Ex: Salário, Freelance, Bônus, etc."
+                    required
+                    class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                <!-- Valor -->
+                <div>
+                  <label
+                    for="amount"
+                    class="block text-sm font-medium text-slate-700 mb-1"
+                    >Valor (R$) *</label
+                  >
+                  <input
+                    type="number"
+                    id="amount"
+                    name="amount"
+                    step="0.01"
+                    min="0"
+                    placeholder="0.00"
+                    required
+                    class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                <!-- Botão de Envio -->
+                <button
+                  type="submit"
+                  class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+                >
+                  💾 Registrar Renda
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Coluna de Informações -->
+          <div class="lg:col-span-1 space-y-4 h-fit">
+            <!-- Informações sobre Tipos de Renda -->
+            <div
+              class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"
+            >
+              <h2 class="font-semibold text-slate-900 mb-4">
+                📋 Tipos de Renda
+              </h2>
+              <div class="space-y-4">
+                <div>
+                  <div class="font-semibold text-slate-900 mb-1">
+                    Renda Mensal
+                  </div>
+                  <p class="text-sm text-slate-600">
+                    Salário, renda fixa ou recorrente mês a mês
+                  </p>
+                </div>
+                <div class="border-t border-slate-200 pt-4">
+                  <div class="font-semibold text-slate-900 mb-1">
+                    Renda Extra
+                  </div>
+                  <p class="text-sm text-slate-600">
+                    Freelance, vendas, bônus, ou qualquer renda não recorrente
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dica -->
+            <div
+              class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"
+            >
+              <h2 class="font-semibold text-slate-900 mb-3">💡 Dica</h2>
+              <p class="text-sm text-slate-600">
+                Registre suas rendas para acompanhar o balanço mensal e garantir
+                que seus gastos estejam sob controle.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filtros - Largura Total -->
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+          <h2 class="font-semibold text-slate-900 mb-6">🔍 Filtrar Rendas</h2>
+          <div class="flex flex-col md:flex-row gap-6">
+            <div class="flex-1">
+              <label
+                for="monthFilter"
+                class="block text-sm font-medium text-slate-700 mb-2"
+                >📅 Data</label
+              >
+              <input
+                type="date"
+                id="monthFilter"
+                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base bg-white"
+              />
+            </div>
+            <div class="flex-1">
+              <label
+                for="typeFilter"
+                class="block text-sm font-medium text-slate-700 mb-2"
+                >📂 Tipo</label
+              >
+              <select
+                id="typeFilter"
+                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base bg-white"
+              >
+                <option value="">Todos os tipos</option>
+                <option value="monthly">Renda Mensal</option>
+                <option value="extra">Renda Extra</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista de Todas as Rendas -->
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+        >
+          <div class="p-6 border-b border-slate-100">
+            <h2 class="text-xl font-semibold text-slate-900">
+              📊 Todas as Rendas
+            </h2>
+          </div>
+          <div id="allIncomesList" class="p-4"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="text-slate-500 py-6 mt-12" style="padding-bottom: 10px">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <p class="text-sm">
+          Powered by
+          <span class="text-blue-600 font-semibold">Anderson's Softwares</span>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Script do Formulário -->
+    <script type="module">
+      import { setupIncomeForm } from "../src/js/ui/incomeForm.js";
+      import {
+        renderIncomesPage,
+        setupIncomeFilters,
+      } from "../src/js/ui/incomesList.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setupIncomeForm();
+        renderIncomesPage();
+        setupIncomeFilters();
+      });
+    </script>
+  </body>
+</html>

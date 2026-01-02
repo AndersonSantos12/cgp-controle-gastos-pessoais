@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Gastos - CGP</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../public/images/favicon2.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../public/images/favicon2.png"
+    />
+    <link rel="shortcut icon" href="../public/images/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-800 font-sans pb-20">
+    <!-- Cabeçalho Fixo -->
+    <header class="bg-blue-900 text-white p-4 shadow-lg sticky top-0 z-10">
+      <div class="max-w-4xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <svg
+            class="w-8 h-8 text-blue-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+          <span
+            class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent drop-shadow-lg hover:from-blue-500 hover:to-blue-700 transition-all cursor-pointer"
+            >CGP</span
+          >
+        </div>
+        <nav class="flex gap-4">
+          <a
+            href="../index.html"
+            class="px-4 py-2 hover:bg-blue-700 rounded-lg transition"
+          >
+            Dashboard
+          </a>
+          <a
+            href="expenses.html"
+            class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-600 transition"
+          >
+            Gastos
+          </a>
+          <a
+            href="income.html"
+            class="px-4 py-2 hover:bg-blue-700 rounded-lg transition"
+          >
+            Rendas
+          </a>
+          <a
+            href="allocations.html"
+            class="px-4 py-2 hover:bg-blue-700 rounded-lg transition"
+          >
+            Alocações
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+      <div class="max-w-4xl mx-auto p-4 space-y-6">
+        <!-- Grid de Formulário e Informações -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          <!-- Coluna do Formulário -->
+          <div class="lg:col-span-2">
+            <div
+              class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"
+            >
+              <h1 class="text-2xl font-bold mb-6 text-slate-900">Novo Gasto</h1>
+
+              <form id="expenseForm" class="space-y-4">
+                <!-- Data -->
+                <div>
+                  <label
+                    for="date"
+                    class="block text-sm font-medium text-slate-700 mb-1"
+                    >Data *</label
+                  >
+                  <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    required
+                    class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                <!-- Tipo -->
+                <div>
+                  <label
+                    for="kind"
+                    class="block text-sm font-medium text-slate-700 mb-1"
+                    >Tipo de Gasto *</label
+                  >
+                  <select
+                    id="kind"
+                    name="kind"
+                    required
+                    class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Selecione...</option>
+                    <option value="fixed">
+                      Fixo (assinatura, internet, etc.)
+                    </option>
+                    <option value="variable">
+                      Variável (débito, dinheiro, pix)
+                    </option>
+                    <option value="credit_one_time">Crédito à Vista</option>
+                    <option value="credit_installments">
+                      Crédito Parcelado
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Forma de Pagamento (apenas para variável) -->
+                <div id="paymentMethodGroup" class="hidden">
+                  <label
+                    for="paymentMethod"
+                    class="block text-sm font-medium text-slate-700 mb-1"
+                    >Forma de Pagamento *</label
+                  >
+                  <select
+                    id="paymentMethod"
+                    name="paymentMethod"
+                    class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Selecione...</option>
+                    <option value="debit">Débito</option>
+                    <option value="cash">Dinheiro</option>
+                    <option value="pix">PIX</option>
+                  </select>
+                </div>
+
+                <!-- Descrição -->
+                <div>
+                  <label
+                    for="description"
+                    class="block text-sm font-medium text-slate-700 mb-1"
+                    >Descrição *</label
+                  >
+                  <input
+                    type="text"
+                    id="description"
+                    name="description"
+                    placeholder="Ex: Almoço, Netflix, etc."
+                    required
+                    class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                <!-- Valor -->
+                <div>
+                  <label
+                    for="amount"
+                    class="block text-sm font-medium text-slate-700 mb-1"
+                    >Valor (R$) *</label
+                  >
+                  <input
+                    type="number"
+                    id="amount"
+                    name="amount"
+                    step="0.01"
+                    min="0"
+                    placeholder="0.00"
+                    required
+                    class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                <!-- Categoria -->
+                <div>
+                  <label
+                    for="category"
+                    class="block text-sm font-medium text-slate-700 mb-1"
+                    >Categoria</label
+                  >
+                  <select
+                    id="category"
+                    name="category"
+                    class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Selecione uma categoria</option>
+                    <option value="Alimentação">🍔 Alimentação</option>
+                    <option value="Transporte">🚗 Transporte</option>
+                    <option value="Saúde">🏥 Saúde</option>
+                    <option value="Educação">📚 Educação</option>
+                    <option value="Lazer">🎬 Lazer</option>
+                    <option value="Compras">🛍️ Compras</option>
+                    <option value="Moradia">🏠 Moradia</option>
+                    <option value="Utilidades">💡 Utilidades</option>
+                    <option value="Assinaturas">📱 Assinaturas</option>
+                    <option value="Outros">📦 Outros</option>
+                  </select>
+                </div>
+
+                <!-- Lazer -->
+                <div class="space-y-2">
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="isLeisure"
+                      class="w-4 h-4 rounded border-slate-300 text-blue-600"
+                    />
+                    <span class="text-sm font-medium text-slate-700"
+                      >Classificar como Lazer</span
+                    >
+                  </label>
+                  <p class="text-xs text-slate-600">
+                    Despesas de lazer reduzem o saldo da reserva-lazer
+                  </p>
+                </div>
+
+                <!-- Parcelamentos (apenas para compras parceladas no crédito) -->
+                <div id="installmentsGroup" class="hidden space-y-2">
+                  <label
+                    for="totalInstallments"
+                    class="block text-sm font-medium text-slate-700"
+                    >Número de Parcelas (mínimo 2) *</label
+                  >
+                  <input
+                    type="number"
+                    id="totalInstallments"
+                    name="totalInstallments"
+                    min="2"
+                    value="2"
+                    class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <p class="text-xs text-slate-600">
+                    A compra será dividida e propagada nos meses seguintes
+                    automaticamente
+                  </p>
+                </div>
+
+                <!-- Botão de Envio -->
+                <button
+                  type="submit"
+                  class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+                >
+                  💾 Registrar Gasto
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Coluna de Informações -->
+          <div class="lg:col-span-1 space-y-4 h-fit">
+            <!-- Informações sobre Tipos de Gasto -->
+            <div
+              class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"
+            >
+              <h2 class="font-semibold text-slate-900 mb-4">
+                📋 Tipos de Gasto
+              </h2>
+              <div class="space-y-4">
+                <div>
+                  <div class="font-semibold text-slate-900 mb-1">Fixo</div>
+                  <p class="text-sm text-slate-600">
+                    Assinaturas, internet, aluguel, contas recorrentes
+                  </p>
+                </div>
+                <div class="border-t border-slate-200 pt-4">
+                  <div class="font-semibold text-slate-900 mb-1">Variável</div>
+                  <p class="text-sm text-slate-600">
+                    Compras do dia a dia com débito, dinheiro ou PIX
+                  </p>
+                </div>
+                <div class="border-t border-slate-200 pt-4">
+                  <div class="font-semibold text-slate-900 mb-1">
+                    Crédito à Vista
+                  </div>
+                  <p class="text-sm text-slate-600">
+                    Compras no cartão de crédito (pagamento único)
+                  </p>
+                </div>
+                <div class="border-t border-slate-200 pt-4">
+                  <div class="font-semibold text-slate-900 mb-1">
+                    Crédito Parcelado
+                  </div>
+                  <p class="text-sm text-slate-600">
+                    Compras parceladas. Cada parcela é lançada no mês correto
+                    automaticamente
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dica -->
+            <div
+              class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"
+            >
+              <h2 class="font-semibold text-slate-900 mb-3">💡 Dica</h2>
+              <p class="text-sm text-slate-600">
+                Marque como "Lazer" para que o gasto seja contabilizado contra a
+                sua reserva-lazer mensal.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filtros - Largura Total -->
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+          <h2 class="font-semibold text-slate-900 mb-6">🔍 Filtrar Gastos</h2>
+          <div class="flex flex-col md:flex-row gap-6">
+            <div class="flex-1">
+              <label
+                for="monthFilter"
+                class="block text-sm font-medium text-slate-700 mb-2"
+                >📅 Data</label
+              >
+              <input
+                type="date"
+                id="monthFilter"
+                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base bg-white"
+              />
+            </div>
+            <div class="flex-1">
+              <label
+                for="kindFilter"
+                class="block text-sm font-medium text-slate-700 mb-2"
+                >📂 Tipo</label
+              >
+              <select
+                id="kindFilter"
+                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base bg-white"
+              >
+                <option value="">Todos os tipos</option>
+                <option value="fixed">Fixo</option>
+                <option value="variable">Variável</option>
+                <option value="credit_one_time">Crédito à Vista</option>
+                <option value="credit_installments">Crédito Parcelado</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista de Todos os Gastos -->
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+        >
+          <div class="p-6 border-b border-slate-100">
+            <h2 class="text-xl font-semibold text-slate-900">
+              📊 Todos os Gastos
+            </h2>
+          </div>
+          <div id="allExpensesList" class="p-4"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="text-slate-500 py-6 mt-12" style="padding-bottom: 10px">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <p class="text-sm">
+          Powered by
+          <span class="text-blue-600 font-semibold">Anderson's Softwares</span>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Script do Formulário -->
+    <script type="module">
+      import { setupExpenseForm } from "../src/js/ui/expenseForm.js";
+      import {
+        renderExpensesPage,
+        setupExpenseFilters,
+      } from "../src/js/ui/expensesList.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setupExpenseForm();
+        renderExpensesPage();
+        setupExpenseFilters();
+      });
+    </script>
+  </body>
+</html>
